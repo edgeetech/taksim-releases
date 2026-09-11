@@ -8,6 +8,12 @@ Download the latest supported package from
 [Releases](https://github.com/edgeetech/taksim-releases/releases). Verify the
 archive against the accompanying `SHA256SUMS.txt` before installation.
 
+For the Windows MVP, download `install-release.ps1` from the release and run:
+
+```powershell
+.\install-release.ps1 -Repository edgeetech/taksim-releases -Version 0.1.0
+```
+
 Documentation: [taksim.edgee.tech](https://taksim.edgee.tech/)
 
 Privacy: [taksim.edgee.tech/privacy](https://taksim.edgee.tech/privacy)
