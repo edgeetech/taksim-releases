@@ -14,6 +14,9 @@ For the Windows MVP, download `install-release.ps1` from the release and run:
 .\install-release.ps1 -Repository edgeetech/taksim-releases -Version 0.1.0
 ```
 
+See [Windows installation and verification](INSTALLATION.md) for the direct
+download command, installer digest, and data-preservation boundary.
+
 Documentation: [taksim.edgee.tech](https://taksim.edgee.tech/)
 
 Privacy: [taksim.edgee.tech/privacy](https://taksim.edgee.tech/privacy)
