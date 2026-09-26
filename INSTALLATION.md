@@ -1,33 +1,46 @@
 # Windows installation
 
-## Install Taksim v0.1.0
+## Install the latest release
 
-Download the installer from the public release, then run it from PowerShell:
+In PowerShell (Windows PowerShell 5.1 or PowerShell 7, no admin needed):
 
 ```powershell
-Invoke-WebRequest `
-  -Uri 'https://github.com/edgeetech/taksim-releases/releases/download/v0.1.0/install-release.ps1' `
-  -OutFile '.\install-release.ps1'
-
-.\install-release.ps1 `
-  -Repository edgeetech/taksim-releases `
-  -Version 0.1.0
+irm https://github.com/edgeetech/taksim-releases/releases/latest/download/install.ps1 | iex
 ```
 
-The SHA-256 digest of the v0.1.0 installer is:
+The installer resolves the latest release, downloads `taksim-connector-win-x64.zip`,
+`SHA256SUMS.txt` and `install-release.ps1` over HTTPS, verifies the archive and
+`install-release.ps1` against `SHA256SUMS.txt` (it refuses to continue if an entry is
+missing or does not match), installs into a version-specific directory under
+`%LOCALAPPDATA%\Taksim`, switches the `current` link only after the binary validates,
+adds Taksim to your user PATH, and runs `taksim setup`.
 
-```text
-cba84510dc47e305116d10c41d2e9196d95f58bdb01c13ed03b9b776304a8aeb
+Rerun the same command, or run `taksim update --apply`, to upgrade. Continue with the
+[Quick start](https://taksim.edgee.tech/docs/quick-start/).
+
+### Options
+
+Pin a version or skip setup:
+
+```powershell
+& ([scriptblock]::Create((irm https://github.com/edgeetech/taksim-releases/releases/latest/download/install.ps1))) -Version vX.Y.Z -NoSetup
 ```
 
-The installer downloads the selected release archive and `SHA256SUMS.txt` over
-HTTPS, checks the archive against the matching checksum entry, extracts it into
-a version-specific directory under `%LOCALAPPDATA%\Taksim`, validates the
-binary, and only then switches the `current` installation link.
+### Offline or manual install
 
-Canonical user data is stored separately under `%USERPROFILE%\.taksim`. The
-installer changes the versioned binary installation and does not remove or
-replace that user-data directory.
+Download `install-release.ps1`, `taksim-connector-win-x64.zip` and `SHA256SUMS.txt`
+from the same [release](https://github.com/edgeetech/taksim-releases/releases), check
+them against `SHA256SUMS.txt` (`Get-FileHash <file> -Algorithm SHA256`), then run:
+
+```powershell
+.\install-release.ps1 -ArtifactPath .\taksim-connector-win-x64.zip -ChecksumPath .\SHA256SUMS.txt
+```
+
+## Your data
+
+Canonical user data is stored separately under `%USERPROFILE%\.taksim`. The installers
+change only the versioned binary installation and never remove or replace that
+directory.
 
 ## Verify the installation
 
@@ -37,9 +50,4 @@ Open a new PowerShell terminal and run:
 taksim version
 taksim doctor
 taksim install status
-taksim claude --version
-taksim codex --version
 ```
-
-The final two commands verify managed-client launch wiring without sending a
-paid inference request.

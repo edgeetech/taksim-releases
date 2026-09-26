@@ -4,18 +4,22 @@ This repository is the public distribution channel for official Taksim binaries,
 installers, and checksums. Application source code and private engineering data are
 not published here.
 
-Download the latest supported package from
-[Releases](https://github.com/edgeetech/taksim-releases/releases). Verify the
-archive against the accompanying `SHA256SUMS.txt` before installation.
+## Install
 
-For the Windows MVP, download `install-release.ps1` from the release and run:
+In PowerShell (Windows, no admin needed):
 
 ```powershell
-.\install-release.ps1 -Repository edgeetech/taksim-releases -Version 0.1.0
+irm https://github.com/edgeetech/taksim-releases/releases/latest/download/install.ps1 | iex
 ```
 
-See [Windows installation and verification](INSTALLATION.md) for the direct
-download command, installer digest, and data-preservation boundary.
+This installs the latest release and runs `taksim setup`. Rerun it, or run
+`taksim update --apply`, to upgrade. Next steps:
+[Quick start](https://taksim.edgee.tech/docs/quick-start/).
+
+See [Windows installation and verification](INSTALLATION.md) for pinned versions,
+offline installs, checksum verification, and the data-preservation boundary.
+
+All releases: [Releases](https://github.com/edgeetech/taksim-releases/releases).
 
 Documentation: [taksim.edgee.tech](https://taksim.edgee.tech/)
 
